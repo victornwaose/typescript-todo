@@ -25,7 +25,16 @@ var SingleTodo = function (_a) {
     var handleDelete = function (id) {
         setTodos(todos === null || todos === void 0 ? void 0 : todos.filter(function (todo) { return todo.id !== id; }));
     };
-    return (react_1["default"].createElement("form", { className: "todos_single" },
+    var handleEdit = function (e, id) {
+        e.preventDefault();
+        setTodos(todos.map(function (todo) {
+            return todo.id === id ? __assign(__assign({}, todo), { todo: editData }) : todo;
+        }));
+        setEdit(false);
+    };
+    return (react_1["default"].createElement("form", { className: "todos_single", onSubmit: function (e) {
+            handleEdit(e, todo.id);
+        } },
         edit ? (react_1["default"].createElement("input", { value: editData, onChange: function (e) { return setEditData(e.target.value); }, className: "todos_single_input" })) : todo.isDone ? (react_1["default"].createElement("s", { className: "todos_single-text" }, todo === null || todo === void 0 ? void 0 : todo.todo)) : (react_1["default"].createElement("span", { className: "todos_single-text" }, todo === null || todo === void 0 ? void 0 : todo.todo)),
         react_1["default"].createElement("div", { className: "todos_single-button" },
             react_1["default"].createElement("button", { onClick: function () {
